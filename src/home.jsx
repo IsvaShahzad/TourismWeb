@@ -8,12 +8,17 @@ import FadeInSection from './fadein';
 
 export default function Home() {
   const navigate = useNavigate();
-  const sliderRef = useRef(null); 
+  const sliderRef = useRef(null);
+  const emailSectionRef = useRef(null); // 👈 ref for email section
 
-  const slides = [
-    { src: '/images/beach.jpg', caption: 'Relax at the Beach' },
-    { src: '/images/mountains.jpg', caption: 'Explore the Mountains' },
-  ];
+ const slides = [
+  { src: '/images/beach.jpg', caption: 'Relax at the Beach' },
+  { src: '/images/mountains.jpg', caption: 'Explore the Mountains' },
+  { src: '/images/desert.jpg', caption: 'Desert Safari Adventure' },
+  { src: '/images/city.jpg', caption: 'Urban Exploration' },
+  { src: '/images/lake.jpg', caption: 'Tranquil Lakeside Escape' },
+];
+
 
   const settings = {
     dots: true,
@@ -23,8 +28,8 @@ export default function Home() {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2500,
-    centerMode: false,       // 👈 Makes sure it's not centered with big spacing
-    centerPadding: '0px',    // 👈 Removes internal gap
+    centerMode: false,
+    centerPadding: '0px',
   };
 
   const handleClick = (slide) => {
@@ -35,11 +40,11 @@ export default function Home() {
     sliderRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const navItems = ['Destinations', 'Trips', 'Stories', 'Books', 'Explore'];
+  const navItems = ['Destinations', 'Trips', 'Contact us', 'Books', 'Explore'];
 
   return (
     <>
-      {/* Header Video with Overlay Navbar and Text */}
+      {/* Header Video Section */}
       <div style={{
         position: 'relative',
         width: '100%',
@@ -65,7 +70,7 @@ export default function Home() {
           }}
         />
 
-        {/* Navbar on top of video */}
+        {/* Navbar */}
         <div style={{
           width: '100%',
           padding: '20px 60px',
@@ -81,79 +86,97 @@ export default function Home() {
           <div style={{ fontWeight: 'bold', fontSize: '22px' }}>TravelApp</div>
           <div style={{ display: 'flex', gap: '30px' }}>
             {navItems.map((item) => (
-              <a key={item} href="#" style={{ color: '#fff', textDecoration: 'none' }}>
-                {item}
-              </a>
+             <a
+  key={item}
+  href="#"
+  onClick={(e) => {
+    e.preventDefault();
+    if (item === 'Contact us' && emailSectionRef.current) {
+      emailSectionRef.current.scrollIntoView({ behavior: 'smooth' });
+    } else if (item === 'Destinations' && sliderRef.current) {
+      sliderRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }}
+  style={{
+    color: '#fff',
+    textDecoration: 'none',
+    position: 'relative',
+    paddingBottom: '4px',
+    transition: 'all 0.3s ease',
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.borderBottom = '2px solid white';
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.borderBottom = '2px solid transparent';
+  }}
+>
+  {item}
+</a>
+
             ))}
           </div>
         </div>
 
-        {/* Text overlay */}
+        {/* Text Overlay */}
         <div
-  onClick={scrollToSlider}
-  style={{
-    position: 'absolute',
-    right: '5%',
-    top: '45%',
-    transform: 'translateY(-50%)',
-    padding: '20px 30px',
-    fontSize: '45px',
-    color: '#fff',
-    lineHeight: '1.4',
-    letterSpacing: '2px',
-    zIndex: 1,
-    cursor: 'pointer',
-  }}
->
-  {/* Line 1: "Explore" */}
-  <div
-    style={{
-      display: 'inline-block',
-      borderBottom: '1px solid transparent',
-      transition: 'border-bottom 0.3s',
-    }}
-    onMouseEnter={(e) => {
-      e.currentTarget.style.borderBottom = '1px solid white';
-    }}
-    onMouseLeave={(e) => {
-      e.currentTarget.style.borderBottom = '1px solid transparent';
-    }}
-  >
-    Explore
-  </div>
-
-  <br />
-
-  {/* Line 2: "various destinations →" */}
-  <div
-    style={{
-      display: 'inline-block',
-      borderBottom: '1px solid transparent',
-      transition: 'border-bottom 0.3s',
-    }}
-    onMouseEnter={(e) => {
-      e.currentTarget.style.borderBottom = '1px solid white';
-    }}
-    onMouseLeave={(e) => {
-      e.currentTarget.style.borderBottom = '1px solid transparent';
-    }}
-  >
-    various destinations →
-  </div>
-</div>
-
-
+          onClick={scrollToSlider}
+          style={{
+            position: 'absolute',
+            right: '5%',
+            top: '45%',
+            transform: 'translateY(-50%)',
+            padding: '20px 30px',
+            fontSize: '45px',
+            color: '#fff',
+            lineHeight: '1.4',
+            letterSpacing: '2px',
+            zIndex: 1,
+            cursor: 'pointer',
+          }}
+        >
+          <div
+            style={{
+              display: 'inline-block',
+              borderBottom: '1px solid transparent',
+              transition: 'border-bottom 0.3s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderBottom = '1px solid white';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderBottom = '1px solid transparent';
+            }}
+          >
+            Explore
+          </div>
+          <br />
+          <div
+            style={{
+              display: 'inline-block',
+              borderBottom: '1px solid transparent',
+              transition: 'border-bottom 0.3s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderBottom = '1px solid white';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderBottom = '1px solid transparent';
+            }}
+          >
+            various destinations →
+          </div>
+        </div>
       </div>
 
-      {/* Slider Section with Fade Animation */}
+      {/* Slider Section */}
       <FadeInSection>
-        <div ref={sliderRef} style={{ padding: '30px', textAlign: 'start',  marginBottom: '30px'  }}>
+        <div ref={sliderRef} style={{ padding: '30px', textAlign: 'start', marginBottom: '30px' }}>
           <h1 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '5px' }}>Plan your trip</h1>
-         <p 
-         style={{ fontSize: '52px', fontWeight: '400', marginTop: '0', lineHeight: '1.1' }}>
-           Where to next?</p>
-              <Slider {...settings}>
-
+          <p style={{ fontSize: '52px', fontWeight: '400', marginTop: '0', lineHeight: '1.1' }}>
+            Where to next?
+          </p>
+          <Slider {...settings}>
             {slides.map((slide, index) => (
               <FadeInSection key={index}>
                 <div
@@ -161,7 +184,7 @@ export default function Home() {
                   style={{
                     cursor: 'pointer',
                     textAlign: 'center',
-                    padding: '0 5px'
+                    padding: '0 2px'
                   }}
                 >
                   <img
@@ -182,23 +205,137 @@ export default function Home() {
         </div>
       </FadeInSection>
 
-      {/* Gradient Box with Fade-in */}
+      {/* Contact Email Section */}
       <FadeInSection>
-        <div style={{
-          width: '80%',
-          margin: 'auto',
-          padding: '50px',
-          borderRadius: '20px',
-          background: 'linear-gradient(135deg, #6e8efb, #a777e3)',
-          color: 'white',
-          fontSize: '24px',
-          textAlign: 'center',
-          boxShadow: '0 10px 20px rgba(0,0,0,0.2)',
-          marginBottom: '100px'
-        }}>
-          🌍 Discover the world like never before.
+        <div
+          ref={emailSectionRef}
+          style={{
+            backgroundImage: "url('/images/green.png')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            width: '100%',
+            height: '400px',
+            display: 'flex',
+            alignItems: 'flex-start',
+            justifyContent: 'center',
+            color: 'white',
+            textAlign: 'center',
+            padding: '60px 20px 20px 20px',
+            boxSizing: 'border-box'
+          }}
+        >
+          <div style={{
+            padding: '20px',
+            borderRadius: '10px',
+            maxWidth: '80%'
+          }}>
+            <h2 style={{ fontSize: '42px', marginBottom: '10px' }}>
+              Let the world come to you—inspiration sent regularly.
+            </h2>
+            <p style={{ fontSize: '20px', lineHeight: '1.5', marginBottom: '20px' }}>
+              Embark on unforgettable journeys and create lasting memories. Your next adventure starts here.
+            </p>
+
+            {/* Email Input and Subscribe Button */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '20px',
+              flexWrap: 'wrap',
+              marginTop: '40px'
+            }}>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                style={{
+                  padding: '12px 20px',
+                  borderRadius: '25px',
+                  border: 'none',
+                  outline: 'none',
+                  width: '300px',
+                  backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                  color: '#333',
+                  fontSize: '16px',
+                }}
+              />
+              <button
+                style={{
+                  padding: '12px 24px',
+                  borderRadius: '25px',
+                  border: 'none',
+                  backgroundColor: '#ffffff',
+                  color: '#333',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  fontSize: '16px',
+                  transition: 'background 0.3s',
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#e0e0e0'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#ffffff'}
+              >
+                Subscribe
+              </button>
+            </div>
+          </div>
         </div>
       </FadeInSection>
+
+      {/* Gradient Footer Section */}
+<FadeInSection>
+  <div
+    style={{
+      position: 'relative',
+      width: '100%',
+      height: '700px', // ⬅️ Increased height
+      borderRadius: '0px',
+      overflow: 'hidden',
+    }}
+  >
+    {/* Video Background */}
+    <video
+      src="/videos/forest2.mp4" // Replace with your actual video path
+      autoPlay
+      muted
+      loop
+      playsInline
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%', // ⬅️ Match parent height
+        objectFit: 'cover',
+        zIndex: 0,
+      }}
+    />
+
+    {/* Overlay Text */}
+   {/* Overlay Text */}
+<div
+  style={{
+    position: 'relative',
+    zIndex: 1,
+    color: 'white',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column', // ⬅️ Stack text vertically
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+    padding: '20px',
+  }}
+>
+  <h2 style={{ fontSize: '42px', marginBottom: '15px' }}>
+    Where every journey whispers a story.
+  </h2>
+ 
+</div>
+
+  </div>
+</FadeInSection>
+
+
     </>
   );
 }
