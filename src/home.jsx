@@ -63,7 +63,7 @@ export default function Home() {
           color: '#fff',
           fontSize: '18px',
         }}>
-          <div style={{ fontWeight: 'bold', fontSize: '22px' }}>TravelApp</div>
+          <div style={{ fontSize: '21px' }}>Tourvia</div>
           <div style={{ display: 'flex', gap: '30px' }}>
             {navItems.map((item) => (
               <a
@@ -189,7 +189,7 @@ export default function Home() {
               color: 'white',
               padding: '12px',
               textAlign: 'center',
-              fontSize: '2px',
+              fontSize: '24px',
               fontWeight: '300',
             }}>
               {slide.caption}
@@ -257,7 +257,7 @@ export default function Home() {
                   borderRadius: '25px',
                   border: 'none',
                   backgroundColor: '#ffffff',
-                  color: '#333',
+                  color: '#577b2c',
                   fontWeight: '600',
                   cursor: 'pointer',
                   fontSize: '16px',
@@ -315,6 +315,68 @@ export default function Home() {
           </div>
         </div>
       </FadeInSection>
+
+      <FadeInSection>
+  <div style={{
+    display: 'flex',
+    width: '100%',
+    backgroundColor: '#577b2c',
+    color: 'white',
+    padding: 0,
+    margin: 0,
+    minHeight: '400px',
+  }}>
+    <img
+  src="/images/trees.jpg"
+  alt="Travel Scene"
+  style={{
+    width: '30%',
+    height: '50%', // reduced to allow space
+    objectFit: 'cover',
+    borderRadius: '0px 20px 20px 0px', // right side rounded
+    marginTop: '20px', // top space inside the box
+  }}
+/>
+
+    <div style={{
+      width: '50%',
+      display: 'flex',
+      flexDirection: 'column',
+      padding: '40px',
+      boxSizing: 'border-box',
+    }}>
+      <h3 style={{ fontSize: '55px', marginBottom: '10px' }}>
+        Your perfect getaway, made with you in mind.
+      </h3>
+      <p style={{ fontSize: '19px', lineHeight: '1.7' }}>
+           Uncover untouched destinations, immerse yourself in rich local cultures,
+           and collect unforgettable memories along the way. Our handpicked journeys 
+           guide you off the beaten path—blending comfort with true authenticity.
+
+      </p>
+      <button style={{
+    backgroundColor: '#ffffff',
+    color: '#577b2c',
+    border: 'none',
+    borderRadius: '999px', // fully rounded (pill/circle style)
+    padding: '16px 40px',  // larger size
+    fontSize: '16px',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    width: '190px',        // longer button
+    alignSelf: 'flex-start', // aligns left with text
+    transition: 'background-color 0.3s ease',
+    marginTop: '45px',     // space below paragraph
+  }}
+  onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#e6e6e6'}
+  onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#ffffff'}
+  >
+    Book Now
+  </button>
+    </div>
+  </div>
+</FadeInSection>
+
     </>
   );
 }
