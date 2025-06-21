@@ -2,6 +2,10 @@
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FadeInSection from './fadein';
+import StatsSection from './components/statssection';
+import TestimonialsSection from './components/testimonials'; // adjust path if needed
+
+
 
 export default function Home() {
   const navigate = useNavigate();
@@ -376,6 +380,11 @@ export default function Home() {
     </div>
   </div>
 </FadeInSection>
+      <StatsSection />
+            <TestimonialsSection />
+
+
+
 
     </>
   );
